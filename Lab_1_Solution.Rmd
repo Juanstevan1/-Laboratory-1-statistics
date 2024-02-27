@@ -232,42 +232,211 @@ for (i in 1:5) {
 La categoría con mejor puntaje en humanidades es la 3, teniendo un acumulado de 27669.71, siendo eso un 22.4% del total del acumulado de todos los estudiantes.
 
 ### Problema 11
+
 Rural absoluto
-```{r rend_rural}
-(abs<-table(Estudiantes[Estudiantes$Sede=="RURAL",]$Clasificación_Primaria))
+
+```{r rend_rural_pr}
+(abs_r_pr<-table(Estudiantes[Estudiantes$Sede=="RURAL",]$Clasificación_Primaria))
 ```
+
 Rural relativo
-```{r rend_rural}
-(abs<-table(Estudiantes[Estudiantes$Sede=="RURAL",]$Clasificación_Primaria)/length(Estudiantes[Estudiantes$Sede=="RURAL",]$Clasificación_Primaria))
+
+```{r rend_rural_rpr}
+(rel_r_pr<-table(Estudiantes[Estudiantes$Sede=="RURAL",]$Clasificación_Primaria)/length(Estudiantes[Estudiantes$Sede=="RURAL",]$Clasificación_Primaria))
 ```
+
 Rural étnico absoluto
-```{r rend_rural_et}
+
+```{r rend_ruet_pr}
 x<-Estudiantes[Estudiantes$Sede=="RURAL ÉTNICO",]$Clasificación_Primaria
-(abs<-table(x))
+(abs_re_pr<-table(x))
 ```
+
 Rural étnico relativo
-```{r rend_rural_et_r}
+
+```{r rend_ruret_rpr}
 x<-Estudiantes[Estudiantes$Sede=="RURAL ÉTNICO",]$Clasificación_Primaria
-(abs<-table(x)/length(x))
+(rel_re_pr<-table(x)/length(x))
 ```
+
 Urbano ciudad absoluto
-```{r rend_rural_et}
+
+```{r rend_urcity_pr}
 x<-Estudiantes[Estudiantes$Sede=="URBANA CIUDAD",]$Clasificación_Primaria
-(abs<-table(x))
+(abs_uc_pr<-table(x))
 ```
+
 Urbana ciudad relativo
-```{r rend_rural_et_r}
+
+```{r rend_urcity_rpr}
 x<-Estudiantes[Estudiantes$Sede=="URBANA CIUDAD",]$Clasificación_Primaria
-(abs<-table(x)/length(x))
+(rel_uc_pr<-table(x)/length(x))
 ```
+
 Urbana municipio absoluta
-```{r rend_rural_et}
+
+```{r rend_urstate_pr}
 x<-Estudiantes[Estudiantes$Sede=="URBANA MUNICIPIO",]$Clasificación_Primaria
-(abs<-table(x))
+(abs_um_pr<-table(x))
 ```
+
 Urbana municipio relativa
-```{r rend_rural_et_r}
+
+```{r rend_urstate_rpr}
 x<-Estudiantes[Estudiantes$Sede=="URBANA MUNICIPIO",]$Clasificación_Primaria
-(abs<-table(x)/length(x))
+(rel_um_pr<-table(x)/length(x))
 ```
+
 ### Problema 12
+
+Rural absoluto
+
+```{r rend_rural_col}
+x<-Estudiantes[Estudiantes$Sede=="RURAL",]$Clasificación_Bachillerato
+(abs_r_col<-table(x))
+```
+
+Rural relativo
+
+```{r rend_rural_rcol}
+x<-Estudiantes[Estudiantes$Sede=="RURAL",]$Clasificación_Bachillerato
+(rel_r_col<-table(x)/length(x))
+```
+
+Rural étnico absoluto
+
+```{r rend_ruralet_col}
+x<-Estudiantes[Estudiantes$Sede=="RURAL ÉTNICO",]$Clasificación_Bachillerato
+(abs_re_col<-table(x))
+```
+
+Rural étnico relativo
+
+```{r rend_ruralet_rcol}
+x<-Estudiantes[Estudiantes$Sede=="RURAL ÉTNICO",]$Clasificación_Bachillerato
+(rel_re_col<-table(x)/length(x))
+```
+
+Urbana ciudad absoluta
+
+```{r rend_urcity_col}
+x<-Estudiantes[Estudiantes$Sede=="URBANA CIUDAD",]$Clasificación_Bachillerato
+(abs_uc_col<-table(x))
+```
+
+Urbana ciudad relativa
+
+```{r rend_urcity_rcol}
+x<-Estudiantes[Estudiantes$Sede=="URBANA CIUDAD",]$Clasificación_Bachillerato
+(rel_uc_col<-table(x)/length(x))
+```
+
+Urbana municipio absoluta
+
+```{r rend_urstate_col}
+x<-Estudiantes[Estudiantes$Sede=="URBANA MUNICIPIO",]$Clasificación_Bachillerato
+(abs_um_col<-table(x))
+```
+
+Urbana municipio relativa
+
+```{r rend_urstate_rcol}
+x<-Estudiantes[Estudiantes$Sede=="URBANA MUNICIPIO",]$Clasificación_Bachillerato
+(rel_um_col<-table(x)/length(x))
+```
+
+1.  Lo que puede observarse respecto a la clasificación en primaria es que muchos alumnos mejoraron su rendimiento, pasando de rendimiento bajo a los niveles superiores, pero al igual muchos estudiantes bajaron su rendimiento, pasando de rendimiento superior a los niveles inferiores. También puede observarse que la educación bachillerato en las sedes urbanas es significativamente mejor, debido a que en éstas la mayoría de estudiantes obtuvieron un rendimiento superior, alto y medio. Mientras que en las sedes rurales la mayoría obtuvo puntajes inferior, medio y bajo.
+2.  La regla que se utilizó fue clasificarlos según su rendimiento en este orden:
+
+-   Rendimiento superior
+-   Rendimiento alto
+-   Rendimiento medio
+-   Rendimiento inferior
+-   Rendimiento bajo
+
+Siendo el rendimiento superior el más alto y el rendimiento bajo el de menor rango.
+
+### Problema 13
+
+Rendimiento primaria sede rural
+
+```{r d_r_pr}
+barplot(abs_r_pr)
+barplot(rel_r_pr)
+```
+
+Rendimiento primaria rural étnico
+
+```{r d_re_pr}
+barplot(abs_re_pr)
+barplot(rel_re_pr)
+```
+
+Rendimiento primaria urbano ciudad
+
+```{r d_uc_pr}
+barplot(abs_uc_pr)
+barplot(rel_uc_pr)
+```
+
+Rendimiento primaria urbano municipio
+
+```{r d_um_pr}
+barplot(abs_um_pr)
+barplot(rel_um_pr)
+```
+
+Rendimiento bachillerato sede rural
+
+```{r d_r_col}
+barplot(abs_r_col)
+barplot(rel_r_col)
+```
+
+Rendimiento bachillerato rural étnico
+
+```{r d_re_col}
+barplot(abs_re_col)
+barplot(rel_re_col)
+```
+
+Rendimiento bachillerato urbano ciudad
+
+```{r d_uc_col}
+barplot(abs_uc_col)
+barplot(rel_uc_col)
+```
+
+Rendimiento bachillerato urbano municipio
+
+```{r d_um_col}
+barplot(abs_um_col)
+barplot(rel_um_col)
+```
+
+## Bloque 2
+
+### Problema 14
+
+```{r info_est_ampliada}
+(Estimulos<-Estudiantes$Estímulo_Departamental+Estudiantes$Estímulo_Municipal+Estudiantes$Estímulo_Nacional)
+(valor_becas<-Estudiantes$Beca_Departamental+Estudiantes$Beca_Municipal+Estudiantes$Beca_Nacional)
+Info_Estudiantes_ampliada<-cbind(Estudiantes, Estimulos)
+(Info_Estudiantes_ampliada<-cbind(Info_Estudiantes_ampliada, valor_becas))
+View(Info_Estudiantes_ampliada)
+```
+
+### Problema 15
+
+```{r some_scolarship}
+estudiantes_filter<-Info_Estudiantes_ampliada[Info_Estudiantes_ampliada$Estimulos>=1,]$valor_becas
+estudiantes_filter
+```
+
+### Problema 16
+
+```{r some_scolarship_hist}
+hist(estudiantes_filter)
+```
+
+El 89% de los estudiantes posee estímulos por menos de \$500.000 con sus becas. El otro 11% posee estímulos que superan los \$500.000.
