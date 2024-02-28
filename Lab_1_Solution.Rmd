@@ -440,3 +440,26 @@ hist(estudiantes_filter)
 ```
 
 El 89% de los estudiantes posee estímulos por menos de \$500.000 con sus becas. El otro 11% posee estímulos que superan los \$500.000.
+
+### Problema 17
+
+```{r some_scolarship_hist_r}
+(my_hist$counts<-my_hist$counts*100/sum(my_hist$counts))
+plot(my_hist)
+```
+De nuevo se puede identificar que el 89.5% de los estudiantes obtuvieron estímulos por menos de 500.000, mientras que el 10.5% obtuvo estímulos por más de 500.000.
+### Problema 18
+```{r some_scolarship_hist_r}
+hist(estudiantes_filter, main="Estímulos vs Cantidad Estímulos", xlab="Valor estímulos", ylab="Cantidad estudiantes", col="lightblue",border="darkorange", cex.main=1.5 , cex.axis=0.6, cex.lab=1.5, labels=1, angle=45)
+```
+
+## Bloque 3
+
+### Problema 19
+
+```{r some_scolarship_list_id}
+(algun_estimulo<-Info_Estudiantes_ampliada[Info_Estudiantes_ampliada$Estimulos>=1,]$ID_estudiante)
+```
+```{r some_re_scolarship_list_id}
+(algun_restimulo<-Info_Estudiantes_ampliada[Info_Estudiantes_ampliada$Estimulos>=1&Info_Estudiantes_ampliada$Sede=="RURAL ÉTNICO",]$ID_estudiante)
+```
