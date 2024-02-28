@@ -460,6 +460,7 @@ hist(estudiantes_filter, main="Estímulos vs Cantidad Estímulos", xlab="Valor e
 ```{r some_scolarship_list_id}
 (algun_estimulo<-Info_Estudiantes_ampliada[Info_Estudiantes_ampliada$Estimulos>=1,]$ID_estudiante)
 ```
+### Problema 20
 ```{r some_re_scolarship_list_id}
 (algun_restimulo<-Info_Estudiantes_ampliada[Info_Estudiantes_ampliada$Estimulos>=1&Info_Estudiantes_ampliada$Sede=="RURAL ÉTNICO",]$ID_estudiante)
 ```
