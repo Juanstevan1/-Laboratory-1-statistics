@@ -617,3 +617,10 @@ ggplot(primaria_comparison, aes(x = Clasificación_Primaria, y = mean_Humanidade
 
 
 ```
+El análisis de los datos revela facetas fundamentales acerca del rendimiento estudiantil y la distribución de variables clave. 
+
+Respecto a las sedes, la preponderancia de la sede urbana municipio señala la concentración de estudiantes en esta demarcación específica, con implicaciones sustanciales para la planificación educativa y la asignación estratégica de recursos. Al examinar el desempeño en el bachillerato, se observa una distribución notablemente uniforme entre los distintos niveles, indicando una propensión hacia un sistema de clasificación imparcial y equitativo.
+
+El análisis del rendimiento en la educación primaria desvela que la gran mayoría de los estudiantes alcanzan niveles superiores, sugiriendo un panorama positivo que refleja los esfuerzos y habilidades inherentes a esta comunidad estudiantil. Profundizando en la clasificación por rendimiento y sede en el bachillerato, se perfilan patrones específicos, como la preeminencia de la sede urbana municipio en categorías de rendimiento superior y la inclinación de la sede rural hacia clasificaciones más elevadas en niveles de rendimiento medio y bajo.
+
+La revisión de los promedios en las disciplinas de Biología, Lenguaje, Matemáticas y Humanidades ofrece una visión panorámica del rendimiento académico general. Específicamente, la constatación del promedio más bajo en Biología suscita la consideración de medidas especiales para mejorar el desempeño en esta disciplina específica.
