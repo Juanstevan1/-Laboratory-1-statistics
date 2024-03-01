@@ -513,6 +513,17 @@ summary_por_area <- Estudiantes %>%
             sd_Humanidades = sd(Puntaje_Humanidades))
 summary_por_area
 
+
+# Resúmenes por Categoría
+categoria_comparison <- caso_ideal %>%
+  group_by(Categoría) %>%
+  summarise(mean_Biología = mean(Puntaje_Biología),
+            mean_Lenguaje = mean(Puntaje_Lenguaje),
+            mean_Matemáticas = mean(Puntaje_Matemáticas),
+            mean_Humanidades = mean(Puntaje_Humanidades))
+categoria_comparison
+
+
 # Resúmenes por Sede
 sede_comparison <- Estudiantes %>%
   group_by(Sede) %>%
@@ -539,6 +550,12 @@ primaria_comparison <- Estudiantes %>%
             mean_Matemáticas = mean(Puntaje_Matemáticas),
             mean_Humanidades = mean(Puntaje_Humanidades))
 primaria_comparison
+
+# Gráficos de barras por categoria
+create_bar_plot(categoria_comparison, "Categoría", "mean_Biología", "Comparación de puntajes de Biología por Categoría", "Categoría", "Puntaje de Biología")
+create_bar_plot(categoria_comparison, "Categoría", "mean_Lenguaje", "Comparación de puntajes de Lenguaje por Categoría", "Categoría", "Puntaje de Lenguaje")
+create_bar_plot(categoria_comparison, "Categoría", "mean_Matemáticas", "Comparación de puntajes de Matemáticas por Categoría", "Categoría", "Puntaje de Matemáticas")
+create_bar_plot(categoria_comparison, "Categoría", "mean_Humanidades", "Comparación de puntajes de Humanidades por Categoría", "Categoría", "Puntaje de Humanidades")
 
 # Gráficos de barras por Sede
 ggplot(sede_comparison, aes(x = Sede, y = mean_Biología)) +
