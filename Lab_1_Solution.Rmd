@@ -31,7 +31,35 @@ View(Estudiantes)
 -   Estímulo_Departamental: Cualitativo nominal
 -   Beca_Departamental: Cuantitativo discreto
 -   Estímulo_Nacional: Cualitativo nominal
--   Beca_Nacional: Cuantitativo discreto \### Problema 6
+-   Beca_Nacional: Cuantitativo discreto
+\### Problema 6
+
+```{r}
+head(Estudiantes)
+
+
+informacion <- data.frame(
+  Variable = names(Estudiantes),
+  Tipo = sapply(Estudiantes, class),
+  Caracteristica = sapply(Estudiantes, function(x) {
+    if (is.factor(x)) {
+      "Cualitativa Nominal"
+    } else if (is.character(x) | is.factor(x)) {
+      "Cualitativa Ordinal"
+    } else if (is.numeric(x)) {
+      if (length(unique(x)) > 10) {
+        "Cuantitativa Continua"
+      } else {
+        "Cuantitativa Discreta"
+      }
+    } else {
+      "Desconocido"
+    }
+  })
+)
+
+print(informacion)
+```
 
 ### Problema 5
 
@@ -463,4 +491,129 @@ hist(estudiantes_filter, main="Estímulos vs Cantidad Estímulos", xlab="Valor e
 ### Problema 20
 ```{r some_re_scolarship_list_id}
 (algun_restimulo<-Info_Estudiantes_ampliada[Info_Estudiantes_ampliada$Estimulos>=1&Info_Estudiantes_ampliada$Sede=="RURAL ÉTNICO",]$ID_estudiante)
+```
+
+### Problema 21
+```{r}
+# PROBLEMA 21
+install.packages("dplyr")
+install.packages("ggplot2")
+library(dplyr)
+library(ggplot2)
+
+# Calcula resúmenes por área
+summary_por_area <- Estudiantes %>%
+  summarise(mean_Biología = mean(Puntaje_Biología),
+            sd_Biología = sd(Puntaje_Biología),
+            mean_Lenguaje = mean(Puntaje_Lenguaje),
+            sd_Lenguaje = sd(Puntaje_Lenguaje),
+            mean_Matemáticas = mean(Puntaje_Matemáticas),
+            sd_Matemáticas = sd(Puntaje_Matemáticas),
+            mean_Humanidades = mean(Puntaje_Humanidades),
+            sd_Humanidades = sd(Puntaje_Humanidades))
+summary_por_area
+
+# Resúmenes por Sede
+sede_comparison <- Estudiantes %>%
+  group_by(Sede) %>%
+  summarise(mean_Biología = mean(Puntaje_Biología),
+            mean_Lenguaje = mean(Puntaje_Lenguaje),
+            mean_Matemáticas = mean(Puntaje_Matemáticas),
+            mean_Humanidades = mean(Puntaje_Humanidades))
+sede_comparison
+
+# Resúmenes por Clasificación de Bachillerato
+bachillerato_comparison <- Estudiantes %>%
+  group_by(Clasificación_Bachillerato) %>%
+  summarise(mean_Biología = mean(Puntaje_Biología),
+            mean_Lenguaje = mean(Puntaje_Lenguaje),
+            mean_Matemáticas = mean(Puntaje_Matemáticas),
+            mean_Humanidades = mean(Puntaje_Humanidades))
+bachillerato_comparison
+
+# Resúmenes por Clasificación de Primaria
+primaria_comparison <- Estudiantes %>%
+  group_by(Clasificación_Primaria) %>%
+  summarise(mean_Biología = mean(Puntaje_Biología),
+            mean_Lenguaje = mean(Puntaje_Lenguaje),
+            mean_Matemáticas = mean(Puntaje_Matemáticas),
+            mean_Humanidades = mean(Puntaje_Humanidades))
+primaria_comparison
+
+# Gráficos de barras por Sede
+ggplot(sede_comparison, aes(x = Sede, y = mean_Biología)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Comparación de puntajes de Biología por sede",
+       x = "Sede",
+       y = "Puntaje de Biología")
+
+ggplot(sede_comparison, aes(x = Sede, y = mean_Lenguaje)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Comparación de puntajes de Lenguaje por sede",
+       x = "Sede",
+       y = "Puntaje de Lenguaje")
+
+ggplot(sede_comparison, aes(x = Sede, y = mean_Matemáticas)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Comparación de puntajes de Matemáticas por sede",
+       x = "Sede",
+       y = "Puntaje de Matemáticas")
+
+ggplot(sede_comparison, aes(x = Sede, y = mean_Humanidades)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Comparación de puntajes de Humanidades por sede",
+       x = "Sede",
+       y = "Puntaje de Humanidades")
+
+# Gráficos de barras por Clasificación de Bachillerato
+ggplot(bachillerato_comparison, aes(x = Clasificación_Bachillerato, y = mean_Biología)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Comparación de puntajes de Biología por Clasificación",
+       x = "Clasificación",
+       y = "Puntaje de Biología")
+
+ggplot(bachillerato_comparison, aes(x = Clasificación_Bachillerato, y = mean_Lenguaje)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Comparación de puntajes de Lenguaje por Clasificación",
+       x = "Clasificación",
+       y = "Puntaje de Lenguaje")
+
+ggplot(bachillerato_comparison, aes(x = Clasificación_Bachillerato, y = mean_Matemáticas)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Comparación de puntajes de Matemáticas por Clasificación",
+       x = "Clasificación",
+       y = "Puntaje de Matemáticas")
+
+ggplot(bachillerato_comparison, aes(x = Clasificación_Bachillerato, y = mean_Humanidades)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Comparación de puntajes de Humanidades por Clasificación",
+       x = "Clasificación",
+       y = "Puntaje de Humanidades")
+
+# Gráficos de barras por Clasificación de Primaria
+ggplot(primaria_comparison, aes(x = Clasificación_Primaria, y = mean_Biología)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Comparación de puntajes de Biología por Clasificación Primaria",
+       x = "Clasificación Primaria",
+       y = "Puntaje de Biología")
+
+ggplot(primaria_comparison, aes(x = Clasificación_Primaria, y = mean_Lenguaje)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Comparación de puntajes de Lenguaje por Clasificación Primaria",
+       x = "Clasificación Primaria",
+       y = "Puntaje de Lenguaje")
+
+ggplot(primaria_comparison, aes(x = Clasificación_Primaria, y = mean_Matemáticas)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Comparación de puntajes de Matemáticas por Clasificación Primaria",
+       x = "Clasificación Primaria",
+       y = "Puntaje de Matemáticas")
+
+ggplot(primaria_comparison, aes(x = Clasificación_Primaria, y = mean_Humanidades)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Comparación de puntajes de Humanidades por Clasificación Primaria",
+       x = "Clasificación Primaria",
+       y = "Puntaje de Humanidades")
+
+
 ```
