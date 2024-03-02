@@ -1,0 +1,572 @@
+---
+title: "Laboratorio-1"
+output: html_document
+date: "2024-02-22"
+---
+  
+### PREGUNTA PROBLEMATIZADORA
+
+Una base de datos aparentemente no contiene información alguna sobre el fenómeno que se está estudiando, sin embargo algunas técnicas básicas, acompañadas de las herramientas adecuadas nos permite sacar conclusiones muy valiosas sobre nuestro objeto de estudio. ¿Cuáles son las técnicas que nos ayudarán a entender mejor el comportamiento de nuestra base de datos?
+
+#### BLOQUE 0
+
+### Problema 1
+  
+
+## Problema 1.1
+
+```{r}
+
+u <- 318
+
+
+## Problema 1.2 
+
+u
+
+## Problema 1.3.
+
+puntaje <- 826; puntaje
+
+# El efecto de agregar ;puntaje es que se imprime el valor de la variable puntaje en la consola.
+
+## Problema 1.4 
+
+# No es necesario utilizar print o ; para imprimir la secuencia, ya que se imprime automáticamente al ejecutar la línea de código.
+
+secuencia <- seq(12, 82); secuencia
+
+
+## Problema 1.5
+
+v1 <- seq(113, 245); v1
+
+
+## Problema 1.6
+
+v2 <- 113:245; v2
+
+#No hay diferencia entre v1 y v2, ambos contienen la misma secuencia de números.
+
+## Problema 1.7
+
+v3 <- seq(from = 113, to = 245, by = 3); v3
+
+
+## Problema 1.8 
+
+v4 <- seq(113, 245, by = 3);v4
+
+
+# La línea de código 113:245, by=3 no es válida en R. La sintaxis correcta es `seq(113, 245, by = 3)`.
+
+```
+
+  
+### Problema 2
+
+```{r}
+
+## Problema 2.1
+
+vector1 <- matrix(113:128, nrow = 4, ncol = 4); vector1
+#aunque v1 y vector1 contienen los mismos números del 113 al 128, v1 es un vector simple, mientras que vector1 es una matriz que se comporta como un vector
+
+## Problema 2.2
+
+matriz1 <- matrix(113:128, nrow = 4, ncol = 4); matriz1
+
+## Problema 2.3
+
+t <- seq(0, 20) 
+vector2 <-  t^3;vector2
+
+## Problema 2.4
+
+plot(t, type = "p", main = "Gráfico de puntos de la variable t", xlab = "Índice", ylab = "Valor")
+
+## Problema 2.5
+
+plot(vector2, type = "l", main = "Gráfico de línea del vector 2", xlab = "Índice", ylab = "Valor")
+
+## Problema 2.6
+
+matriz1[3, 2] <- 118; matriz1
+
+## Problema 2.7
+
+plot(matriz1[, 2], type = "p", main = "Gráfico de puntos de la columna 2 de la matriz1", xlab = "Fila", ylab = "Valor")
+
+```
+
+
+#### BLOQUE 1
+
+
+### Problema 3
+  
+```{r archivo}
+Estudiantes<-read_excel('C:/Users/juane/OneDrive/Documentos/Universidad/Semestre-5/Estadistica/Laboratorio-1/Estudiantes.xlsx')
+View(Estudiantes)
+```
+
+### Problema 4
+
+-   ID_estudiante: cuantitativo discretas
+-   Categoría: cualitativo ordinal
+-   Sede: Cualitativo nominal
+-   Clasificación_Bachillerato: cualitativo ordinal
+-   Clasificación_Primaria: Cualitativo ordinal
+-   Interés_Biología: cualitativo nominal
+-   Puntaje_Biología: cuantitativo continuo
+-   Interés_Lenguaje: Cualitativo nominal
+-   Puntaje_Lenguaje: Cuantitativo continuo
+-   Interés_Matemáticas: Cualitativo nominal
+-   Puntaje_Matemáticas: Cuantitativo continuo
+-   Interés_Humanidades: Cualitativo nominal
+-   Puntaje_Humanidades: Cuantitivo continuo
+-   Estímulo_Municipal: Cualitativo nominal
+-   Beca_Municipal: Cuantitativo discreto
+-   Estímulo_Departamental: Cualitativo nominal
+-   Beca_Departamental: Cuantitativo discreto
+-   Estímulo_Nacional: Cualitativo nominal
+-   Beca_Nacional: Cuantitativo discreto \### Problema 6
+
+### Problema 5
+
+```{r categoria_abs}
+(estudiantes_categoria<-table(Estudiantes$Categoría))
+barplot(estudiantes_categoria)
+```
+
+```{r categoria_rel}
+(rel_cat<-table(Estudiantes[2])/length(Estudiantes$Categoría))
+barplot(rel_cat)
+```
+
+-   La moda se encuentra en las categorías 3 y 5
+-   La gráfica presenta una distribución asimétrica negativa.
+-   No hay diferencias significativas entre la cantidad de personas de una categoría con la cantidad de personas de otra categoría, lo que significa una muestra significativa.
+
+```{r sede_abs}
+(af<-table(Estudiantes$Sede))
+barplot(af)
+```
+
+```{r sede_rel}
+(rf<-table(Estudiantes$Sede))/length(Estudiantes$Sede)
+barplot(rf)
+```
+
+-   La moda está en la zona urbana del municipio, lo que significa que la mayoría de los estudiantes están o estuvieron en una sede urbana del municipio.
+-   La minoría de los estudiantes estuvo en una sede rural étnica.
+
+```{r clbh_abs}
+(abs<-table(Estudiantes$Clasificación_Bachillerato))
+barplot(abs)
+```
+
+```{r f_bch}
+(af<-table(Estudiantes$Clasificación_Bachillerato)/length(Estudiantes$Clasificación_Bachillerato))
+barplot(af)
+```
+
+-   Los rendimientos de los estudiantes están distribuidos prácticamente equitativamente ya que la diferencia entre el valor menos y el valor mayor es de apenas 0.5%.
+
+```{r clasi_primaria_abs}
+(fa<-table(Estudiantes$Clasificación_Primaria))
+barplot(fa)
+```
+
+```{r clasi_primaria_f}
+(fr<-table(Estudiantes$Clasificación_Primaria)/length(Estudiantes$Clasificación_Primaria))
+barplot(fr)
+```
+
+-   La mayoría de los estudiantes tuvo un rendimiento bajo o un rendimiento superior en su educación primaria.
+-   La moda se encuentra en un rendimiento superior.
+-   Muchos estudiantes de rendimiento superior en primaria bajaron a los otros niveles en su educación bachillerato
+-   Muchos estudiantes en rendimiento bajo pasaron a rendimientos mejores en su educación bachillerato. \### Problema 6
+### Problema 6
+```{r rend_sup_sede}
+(fa<- table(Estudiantes[Estudiantes$Clasificación_Bachillerato=="REND_SUPERIOR",]$Sede))
+barplot(fa)
+```
+
+-   Las escuelas urbanas tienen la mayoría de estudiantes con rendimiento superior, siendo la moda la escuela urbana del municipio con 167 estudiantes.
+-   Las escuelas con menos estudiantes con rendimiento superior son las escuelas rurales. 
+
+### Problema 7
+
+```{r rend_alt}
+(fa<- table(Estudiantes[Estudiantes$Clasificación_Bachillerato=="REND_ALTO",]$Sede))
+barplot(fa)
+```
+
+-   La gráfica presenta una distribución asimétrica negativa favoreciendo a los estudiantes de sedes urbanas, es decir, la mayoría de estudiantes con rendimiento alto se encuentra en sedes urbanas.
+-   Los estudiantes en sedes rurales tuvo menos estudiantes con rendimiento superior, siendo la sede rural la sede que tuvo menos estudiantes con rendimiento alto.
+
+```{r rend_med}
+(fa<- table(Estudiantes[Estudiantes$Clasificación_Bachillerato=="REND_MEDIO",]$Sede))
+barplot(fa)
+```
+
+-   En la sede rural están la mayoría de los estudiantes con rendimiento medio.
+-   El segundo lugar en estudiantes con rendimiento medio es la sede urbana del municipio.
+
+```{r rend_infe}
+(fa<- table(Estudiantes[Estudiantes$Clasificación_Bachillerato=="REND_INFERIOR",]$Sede))
+barplot(fa)
+```
+
+-   La mayoría de estudiantes con rendimiento medio está en escuelas de sede rural, siendo la moda la sede rural étnico.
+-   En las sedes urbanas está la minoría de estudiantes con rendimiento inferior, siendo la minoría la sede urbana de la ciudad.
+
+```{r rend_bajo}
+(fa<- table(Estudiantes[Estudiantes$Clasificación_Bachillerato=="REND_BAJO",]$Sede))
+barplot(fa)
+```
+
+-   La sede con más estudiantes con rendimiento bajo fue la sede rural.
+-   La segunda sede con más estudiantes con rendimiento bajo fue la urbana del municipio. 
+
+### Problema 8
+
+```{r inte_math}
+punt<-Estudiantes[Estudiantes$Interés_Matemáticas==1,]$Puntaje_Matemáticas
+matrix(punt)
+```
+
+### Problema 9
+
+```{r punt_subjs}
+(mean(Estudiantes$Puntaje_Biología))
+(mean(Estudiantes$Puntaje_Humanidades))
+(mean(Estudiantes$Puntaje_Lenguaje))
+(mean(Estudiantes$Puntaje_Matemáticas))
+```
+
+- Biología: 50.38
+- Humanidades: 61.83
+- Lenguaje: 39.67
+- Matemáticas: 50.36
+
+El área con mejor rendimiento fue Humanidades, luego le siguen Biología y Matemáticas, quedando Lenguaje como el área con menor rendimiento por parte de los estudiantes. 
+
+### Problema 10
+
+```{r max_biolo_cat}
+max<-0
+category<-0
+total<-0
+for (i in 1:5) {
+  biology_category <- sum(Estudiantes[Estudiantes$Categoría==i,]$Puntaje_Biología)
+  total<-total+biology_category
+  if (biology_category > max) {
+    max <- biology_category
+    category<-i
+  }
+}
+(max)
+(category)
+(percentage<-max*100/total)
+```
+
+La categoría con mejor puntaje será la categoría 1, con puntaje acumulado de 24992.06 y un porcentaje de 24.83% respecto al total del puntaje acumulado.
+
+```{r max_leng_cat}
+max<-0
+category<-0
+total<-0
+for (i in 1:5) {
+  score <- sum(Estudiantes[Estudiantes$Categoría==i,]$Puntaje_Lenguaje)
+  total<-total+score
+  if (score > max) {
+    max <- score
+    category<-i
+  }
+}
+(max)
+(category)
+(percentage<-max*100/total)
+```
+
+La categoría con mejor puntaje en Lenguaje es la categoría 3, con un puntaje de 316557568 acumulado y un 39.94% del total del puntaje acumulado de todos los estudiantes.
+
+```{r max_math_cat}
+max<-0
+category<-0
+total<-0
+for (i in 1:5) {
+  score <- sum(Estudiantes[Estudiantes$Categoría==i,]$Puntaje_Matemáticas)
+  total<-total+score
+  if (score > max) {
+    max <- score
+    category<-i
+  }
+}
+(max)
+(category)
+(percentage<-max*100/total)
+```
+
+La categoría con mejor puntaje en matemáticas es la categoría 1, teniendo un total acumulado de 22116.31, siendo un 21.98% del total acumulado de todos los estudiantes.
+
+```{r max_hum_cat}
+max<-0
+category<-0
+total<-0
+for (i in 1:5) {
+  score <- sum(Estudiantes[Estudiantes$Categoría==i,]$Puntaje_Humanidades)
+  total<-total+score
+  if (score > max) {
+    max <- score
+    category<-i
+  }
+}
+(max)
+(category)
+(percentage<-max*100/total)
+```
+
+La categoría con mejor puntaje en humanidades es la 3, teniendo un acumulado de 27669.71, siendo eso un 22.4% del total del acumulado de todos los estudiantes.
+
+### Problema 11
+
+Rural absoluto
+
+```{r rend_rural_pr}
+(abs_r_pr<-table(Estudiantes[Estudiantes$Sede=="RURAL",]$Clasificación_Primaria))
+```
+
+Rural relativo
+
+```{r rend_rural_rpr}
+(rel_r_pr<-table(Estudiantes[Estudiantes$Sede=="RURAL",]$Clasificación_Primaria)/length(Estudiantes[Estudiantes$Sede=="RURAL",]$Clasificación_Primaria))
+```
+
+Rural étnico absoluto
+
+```{r rend_ruet_pr}
+x<-Estudiantes[Estudiantes$Sede=="RURAL ÉTNICO",]$Clasificación_Primaria
+(abs_re_pr<-table(x))
+```
+
+Rural étnico relativo
+
+```{r rend_ruret_rpr}
+x<-Estudiantes[Estudiantes$Sede=="RURAL ÉTNICO",]$Clasificación_Primaria
+(rel_re_pr<-table(x)/length(x))
+```
+
+Urbano ciudad absoluto
+
+```{r rend_urcity_pr}
+x<-Estudiantes[Estudiantes$Sede=="URBANA CIUDAD",]$Clasificación_Primaria
+(abs_uc_pr<-table(x))
+```
+
+Urbana ciudad relativo
+
+```{r rend_urcity_rpr}
+x<-Estudiantes[Estudiantes$Sede=="URBANA CIUDAD",]$Clasificación_Primaria
+(rel_uc_pr<-table(x)/length(x))
+```
+
+Urbana municipio absoluta
+
+```{r rend_urstate_pr}
+x<-Estudiantes[Estudiantes$Sede=="URBANA MUNICIPIO",]$Clasificación_Primaria
+(abs_um_pr<-table(x))
+```
+
+Urbana municipio relativa
+
+```{r rend_urstate_rpr}
+x<-Estudiantes[Estudiantes$Sede=="URBANA MUNICIPIO",]$Clasificación_Primaria
+(rel_um_pr<-table(x)/length(x))
+```
+
+### Problema 12
+
+Rural absoluto
+
+```{r rend_rural_col}
+x<-Estudiantes[Estudiantes$Sede=="RURAL",]$Clasificación_Bachillerato
+(abs_r_col<-table(x))
+```
+
+Rural relativo
+
+```{r rend_rural_rcol}
+x<-Estudiantes[Estudiantes$Sede=="RURAL",]$Clasificación_Bachillerato
+(rel_r_col<-table(x)/length(x))
+```
+
+Rural étnico absoluto
+
+```{r rend_ruralet_col}
+x<-Estudiantes[Estudiantes$Sede=="RURAL ÉTNICO",]$Clasificación_Bachillerato
+(abs_re_col<-table(x))
+```
+
+Rural étnico relativo
+
+```{r rend_ruralet_rcol}
+x<-Estudiantes[Estudiantes$Sede=="RURAL ÉTNICO",]$Clasificación_Bachillerato
+(rel_re_col<-table(x)/length(x))
+```
+
+Urbana ciudad absoluta
+
+```{r rend_urcity_col}
+x<-Estudiantes[Estudiantes$Sede=="URBANA CIUDAD",]$Clasificación_Bachillerato
+(abs_uc_col<-table(x))
+```
+
+Urbana ciudad relativa
+
+```{r rend_urcity_rcol}
+x<-Estudiantes[Estudiantes$Sede=="URBANA CIUDAD",]$Clasificación_Bachillerato
+(rel_uc_col<-table(x)/length(x))
+```
+
+Urbana municipio absoluta
+
+```{r rend_urstate_col}
+x<-Estudiantes[Estudiantes$Sede=="URBANA MUNICIPIO",]$Clasificación_Bachillerato
+(abs_um_col<-table(x))
+```
+
+Urbana municipio relativa
+
+```{r rend_urstate_rcol}
+x<-Estudiantes[Estudiantes$Sede=="URBANA MUNICIPIO",]$Clasificación_Bachillerato
+(rel_um_col<-table(x)/length(x))
+```
+
+1.  Lo que puede observarse respecto a la clasificación en primaria es que muchos alumnos mejoraron su rendimiento, pasando de rendimiento bajo a los niveles superiores, pero al igual muchos estudiantes bajaron su rendimiento, pasando de rendimiento superior a los niveles inferiores. También puede observarse que la educación bachillerato en las sedes urbanas es significativamente mejor, debido a que en éstas la mayoría de estudiantes obtuvieron un rendimiento superior, alto y medio. Mientras que en las sedes rurales la mayoría obtuvo puntajes inferior, medio y bajo.
+2.  La regla que se utilizó fue clasificarlos según su rendimiento en este orden:
+  
+  -   Rendimiento superior
+-   Rendimiento alto
+-   Rendimiento medio
+-   Rendimiento inferior
+-   Rendimiento bajo
+
+Siendo el rendimiento superior el más alto y el rendimiento bajo el de menor rango.
+
+
+### Problema 13
+
+Rendimiento primaria sede rural
+
+```{r d_r_pr}
+barplot(abs_r_pr)
+barplot(rel_r_pr)
+```
+
+Rendimiento primaria rural étnico
+
+```{r d_re_pr}
+barplot(abs_re_pr)
+barplot(rel_re_pr)
+```
+
+Rendimiento primaria urbano ciudad
+
+```{r d_uc_pr}
+barplot(abs_uc_pr)
+barplot(rel_uc_pr)
+```
+
+Rendimiento primaria urbano municipio
+
+```{r d_um_pr}
+barplot(abs_um_pr)
+barplot(rel_um_pr)
+```
+
+Rendimiento bachillerato sede rural
+
+```{r d_r_col}
+barplot(abs_r_col)
+barplot(rel_r_col)
+```
+
+Rendimiento bachillerato rural étnico
+
+```{r d_re_col}
+barplot(abs_re_col)
+barplot(rel_re_col)
+```
+
+Rendimiento bachillerato urbano ciudad
+
+```{r d_uc_col}
+barplot(abs_uc_col)
+barplot(rel_uc_col)
+```
+
+Rendimiento bachillerato urbano municipio
+
+```{r d_um_col}
+barplot(abs_um_col)
+barplot(rel_um_col)
+```
+  
+#### BLOQUE 2
+  
+
+### Problema 14
+
+```{r info_est_ampliada}
+(Estimulos<-Estudiantes$Estímulo_Departamental+Estudiantes$Estímulo_Municipal+Estudiantes$Estímulo_Nacional)
+(valor_becas<-Estudiantes$Beca_Departamental+Estudiantes$Beca_Municipal+Estudiantes$Beca_Nacional)
+Info_Estudiantes_ampliada<-cbind(Estudiantes, Estimulos)
+(Info_Estudiantes_ampliada<-cbind(Info_Estudiantes_ampliada, valor_becas))
+View(Info_Estudiantes_ampliada)
+```
+
+### Problema 15
+
+```{r some_scolarship}
+estudiantes_filter<-Info_Estudiantes_ampliada[Info_Estudiantes_ampliada$Estimulos>=1,]$valor_becas
+estudiantes_filter
+```
+
+### Problema 16
+
+```{r some_scolarship_hist}
+hist(estudiantes_filter)
+```
+
+El 89% de los estudiantes posee estímulos por menos de \$500.000 con sus becas. El otro 11% posee estímulos que superan los \$500.000.m,
+
+### Problema 17
+
+```{r some_scolarship_hist_r}
+(my_hist$counts<-my_hist$counts*100/sum(my_hist$counts))
+plot(my_hist)
+
+De nuevo se puede identificar que el 89.5% de los estudiantes obtuvieron estímulos por menos de 500.000, mientras que el 10.5% obtuvo estímulos por más de 500.000.
+
+### Problema 18
+
+```{r some_scolarship_hist_r}
+hist(estudiantes_filter, main="Estímulos vs Cantidad Estímulos", xlab="Valor estímulos", ylab="Cantidad estudiantes", col="lightblue",border="darkorange", cex.main=1.5 , cex.axis=0.6, cex.lab=1.5, labels=1, angle=45)
+```
+
+  
+#### BLOQUE 3
+  
+  
+### Problema 19
+
+```{r some_scolarship_list_id}
+(algun_estimulo<-Info_Estudiantes_ampliada[Info_Estudiantes_ampliada$Estimulos>=1,]$ID_estudiante)
+```
+### Problema 20
+```{r some_re_scolarship_list_id}
+(algun_restimulo<-Info_Estudiantes_ampliada[Info_Estudiantes_ampliada$Estimulos>=1&Info_Estudiantes_ampliada$Sede=="RURAL ÉTNICO",]$ID_estudiante)
+```
